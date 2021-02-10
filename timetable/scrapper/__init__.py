@@ -9,21 +9,20 @@ timetable_urls = {
 
 timetable_disc = {
     # Brzesko - Tarnów
-    0: {
+    'brzesko-tarnow': {
         0: '',
         1: '',
         2: '',
         3: ''
     },
     # Tarnów - Brzesko
-    1: {
+    'tarnow-brzesko': {
         0: '',
         1: '',
         2: '',
         3: ''
     },
 }
-
 
 def get_timetable_solak():
     for y in range(2):
@@ -36,9 +35,8 @@ def get_timetable_solak():
 
             data = [[u"".join(d).strip() for d in l] for l in timetable_data]
             flat_data = list(filter(None, [item for sublist in data for item in sublist]))
-            timetable_disc[y][x] = flat_data
+            if y == 0:
+                timetable_disc['brzesko-tarnow'][x] = flat_data
+            else:
+                timetable_disc['tarnow-brzesko'][x] = flat_data
     return timetable_disc
-
-
-def get_val():
-    return None

@@ -10,6 +10,7 @@ def server_test(request):
     return HttpResponse("server working...")
 
 
+@api_view(['GET'])
 def get_response_timetable_solak(request):
     timetable_get = get_timetable_solak()
     return JsonResponse(timetable_get, safe=False)
