@@ -1,14 +1,20 @@
-from django.http import HttpResponse, JsonResponse
-from timetable.scrapper import get_timetable_solak
-from django.views.decorators.csrf import csrf_exempt
-from rest_framework.parsers import JSONParser
-from rest_framework.decorators import api_view
-from rest_framework import status
 import datetime
+
+from django.http import HttpResponse, JsonResponse
+from rest_framework.decorators import api_view
+from timetable.web import get_plawecki
+
+from timetable.web.scraper import get_timetable_solak
 
 
 def server_test(request):
     return HttpResponse("server working...")
+
+
+@api_view(['GET'])
+def get_response_timetable_plawecki(requset, direction):
+    timetable_get = get_plawecki.get_timetable_plawecki(direction)
+    return JsonResponse(timetable_get, safe=False)
 
 
 @api_view(['GET'])
