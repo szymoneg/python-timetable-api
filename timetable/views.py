@@ -18,19 +18,26 @@ def get_response_timetable_plawecki(requset, direction):
 
 
 @api_view(['GET'])
-def get_response_timetable_solak(request):
-    timetable_get = get_timetable_solak()
-    return JsonResponse(timetable_get, safe=False)
-
-
-@api_view(['GET'])
-def get_timetable_solak_oneway(request, direction):
+def get_response_timetable_solak(request, direction):
     timetable_get = get_timetable_solak()[direction]
     return JsonResponse(timetable_get, safe=False)
 
 
 @api_view(['GET'])
+def get_response_timetable_plawecki_all(request):
+    timetable_get = get_plawecki.get_timetable_plawecki('3')
+    return JsonResponse(timetable_get, safe=False)
+
+
+@api_view(['GET'])
+def get_response_timetable_solak_all(request):
+    timetable_get = get_timetable_solak()
+    return JsonResponse(timetable_get, safe=False)
+
+
+@api_view(['GET'])
 def get_close_time(request, time, direction):
+    # TODO get close time for plawecki
     day = datetime.datetime.now().weekday()
     if 0 < day <= 4:
         hours = list(get_timetable_solak()[direction][0])
